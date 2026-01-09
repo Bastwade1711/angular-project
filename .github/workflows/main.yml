@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
 
       - name: Install dependencies
         run: npm ci
@@ -26,5 +26,8 @@ jobs:
 
       - name: Deploy to Apache
         run: |
-          sudo rm -rf /var/www/html/*
-          sudo cp -r dist/* /var/www/html/
+          sudo mkdir -p /var/www/html
+          sudo rsync -av --delete dist/my-app/browser /var/www/html/
+
+      - name: Restart Apache
+        run: sudo systemctl restart httpd
