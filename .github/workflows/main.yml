@@ -27,7 +27,7 @@ jobs:
       - name: Deploy to Apache
         run: |
           sudo mkdir -p /var/www/html
-          sudo rsync -av --delete dist/my-app/ /var/www/html/
+          sudo rsync -av --delete dist/my-app/browser /var/www/html/
 
       - name: Restart Apache
         run: sudo systemctl restart httpd
